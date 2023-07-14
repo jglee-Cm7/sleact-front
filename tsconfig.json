@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true, // import * as React from "react" => import React from "react" 를 가능하게 함
+    "sourceMap": true, // 에러 위치 찾아가기 쉽게 함
+    "lib": ["ES2023", "DOM"],
+    "jsx": "react",
+    "module": "ESNext",
+    "moduleResolution": "Node", // import, export를 Node가 해석할 수 있게 한다.
+    "target": "ES5", // ES5로 해석되게 변환함.
+    "strict": true,
+    "resolveJsonModule": true, // import ~.json 을 허락함
+    "baseUrl": "./src",
+    "paths": {
+      "@hooks/*": ["hooks/*"],
+      "@components/*": ["components/*"],
+      "@layouts/*": ["layouts/*"],
+      "@pages/*": ["pages/*"],
+      "@utils/*": ["utils/*"],
+      "@types/*": ["types/*"]
+    }
+  },
+
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "target": "ES5",
+      "esModuleInterop": true
+    }
+  }
+}

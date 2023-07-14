@@ -1,0 +1,9 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "editor.formatOnSave": true,
+  "endOfLine": "auto",
+  "printWidth": 200,
+  "trailingComma": "all",
+  "semi": true
+}
