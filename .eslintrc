@@ -1,3 +1,103 @@
 {
-  "extends": ["plugin:prettier/recommended"]
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "globals": {
+    "NodeJS": true
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": ["airbnb", "airbnb/hooks", "plugin:react/recommended", "plugin:jsx-a11y/recommended", "eslint-config-prettier", "plugin:prettier/recommended"],
+  "rules": {
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "linebreak-style": ["error", "windows"],
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "semi": ["error", "always"],
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "react/display-name": "off",
+    "react/prop-types": "off",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "no-console": "error",
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
+    "react/jsx-wrap-multilines": "off",
+    "react/react-in-jsx-scope": "off",
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "off",
+    "import/order": [
+      "error",
+      {
+        "pathGroups": [
+          {
+            "pattern": "@lib/**",
+            "group": "external"
+          },
+          {
+            "pattern": "{types/*,@types*,./types}",
+            "group": "type"
+          },
+          {
+            "pattern": "{hooks,@hooks/**/*,./hooks/**,./use**,../use**,../../use**,../../../use**,,../../hooks/**,./_hooks/**,../../../_hooks/**}",
+            "group": "internal"
+          },
+          {
+            "pattern": "{utils/**/*,@utils/**/*,./utils,../utils,../../utils,../../../utils}",
+            "group": "type"
+          },
+          {
+            "pattern": "{constants/**/*,@constants/*,./constants}",
+            "group": "type"
+          },
+          {
+            "pattern": "{services/**/*,@services/**}",
+            "group": "type"
+          },
+          {
+            "pattern": "{layouts/**/*, @layouts/**}",
+            "group": "index"
+          },
+          {
+            "pattern": "{components,components/_common/**,@components,@components/**,svgs,@assets/**/*,@app/**,routes/**,public/**}",
+            "group": "index"
+          },
+          {
+            "pattern": "{styles,./*.scss,../*.scss,../*.module.scss}",
+            "group": "index"
+          }
+        ],
+        "groups": [
+          ["external", "builtin"],
+          ["type", "internal", "object"],
+          ["parent", "sibling", "index"]
+        ],
+        "newlines-between": "always"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      // Tells eslint-plugin-react to automatically detect the version of React to use.
+      "version": "detect"
+    },
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {
+        "project": "."
+      }
+    }
+  }
 }

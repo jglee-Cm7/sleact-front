@@ -9,7 +9,7 @@
     "target": "ES5", // ES5로 해석되게 변환함.
     "strict": true,
     "resolveJsonModule": true, // import ~.json 을 허락함
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
       "@hooks/*": ["hooks/*"],
       "@components/*": ["components/*"],
