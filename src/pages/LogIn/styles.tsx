@@ -9,7 +9,7 @@ export const Header = styled.header`
   align-items: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 48px 0 0 0;
+  padding: 48px 0 32px 0;
   width: 100%;
   & > div {
     display: flex;
@@ -33,6 +33,9 @@ export const SignUpInfo = styled.div`
     color: #1264a3;
     text-decoration: none;
     cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
