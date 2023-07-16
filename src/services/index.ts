@@ -2,7 +2,7 @@ import { errorStatusHandler } from "@utils/connectionUtils";
 import axios from "axios";
 
 export const apiBe = axios.create({
-  baseURL: `${process.env.PUBLIC_BE_URL}/api`,
+  baseURL: `${process.env.PUBLIC_BE_URL}`,
   timeout: 30_000,
   withCredentials: true,
   paramsSerializer: function (paramObj) {
