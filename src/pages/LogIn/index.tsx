@@ -1,11 +1,36 @@
-import React, { FormEventHandler } from "react";
+import React, { ChangeEvent, FormEventHandler, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Header, SignUpInfo, Body, Form, Label, Input, Button } from "@pages/LogIn/styles";
+import useInput from "@hooks/useInput";
+import { Container, Header, SignUpInfo, Body, Form, Label, Input, Button, Error } from "@pages/LogIn/styles";
+import { useLogIn, useMe } from "@services/auth";
 
 function Login() {
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-  };
+  const { data: me, isError, refetch: refetchMe } = useMe();
+  const logInMutation = useLogIn();
+  const [email, onChangeEmail] = useInput("");
+  const [password, onChangePassword] = useInput("");
+  const [logInError, setLogInError] = useState("");
+
+  const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      logInMutation.mutate(
+        { email, password },
+        {
+          onSuccess: (res) => refetchMe(),
+          onError: (error) => setLogInError((error?.response?.data ?? "로그인에 오류가 발생했습니다.") as string),
+        },
+      );
+    },
+    [email, password],
+  );
+
+  console.log(isError, me);
+  if (!isError && me) {
+    console.log("go workspace page!");
+    console.log(me);
+  }
   return (
     <Container>
       <Header>
@@ -27,15 +52,16 @@ function Login() {
           <Label id="email-label">
             <span>이메일 주소</span>
             <div>
-              <Input type="email" id="email" name="email" />
+              <Input type="email" id="email" name="email" value={email} onChange={onChangeEmail} />
             </div>
           </Label>
           <Label id="password-label">
             <span>비밀번호</span>
             <div>
-              <Input type="password" id="password" name="password" />
+              <Input type="password" id="password" name="password" value={password} onChange={onChangePassword} />
             </div>
           </Label>
+          {logInError && <Error>{`${logInError}`}</Error>}
           <Button type="submit">로그인</Button>
         </Form>
       </Body>
