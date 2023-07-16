@@ -114,6 +114,18 @@ export const Button = styled.button`
   }
 `;
 
+export const Error = styled.div`
+  color: #e01e5a;
+  margin: 8px 0 16px;
+  font-weight: bold;
+`;
+
+export const Success = styled.div`
+  color: #2eb67d;
+  margin: 8px 0 16px;
+  font-weight: bold;
+`;
+
 export const LinkContainer = styled.div`
   font-size: 13px;
   color: rgba(var(--sk_foreground_max_solid, 97, 96, 97), 1);

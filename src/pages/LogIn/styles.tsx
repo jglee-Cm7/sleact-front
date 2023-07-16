@@ -100,6 +100,12 @@ export const Input = styled.input`
   }
 `;
 
+export const Error = styled.div`
+  color: #e01e5a;
+  margin: 8px 0 16px;
+  font-weight: bold;
+`;
+
 export const Button = styled.button`
   margin-bottom: 12px;
   width: 100%;
