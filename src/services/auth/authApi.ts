@@ -11,20 +11,20 @@ interface SignUpRequest {
   password: string;
 }
 
-const signUp = async (params: SignUpRequest) => {
-  return await post("/users", params);
+const signUp = (params: SignUpRequest) => {
+  return post("/users", params);
 };
 
-const logIn = async (params: LogInRequest) => {
-  return await post("/users/login", params);
+const logIn = (params: LogInRequest) => {
+  return post("/users/login", params);
 };
 
-const logOut = async () => {
-  return await post("/users/logout");
+const logOut = () => {
+  return post("/users/logout");
 };
 
-const getMe = async () => {
-  return await get("/users");
+const getMe = () => {
+  return get("/users");
 };
 
 export default {

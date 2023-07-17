@@ -1,11 +1,12 @@
-import React, { ChangeEvent, FormEventHandler, useCallback, useState } from "react";
+import React, { FormEventHandler, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
+
 import useInput from "@hooks/useInput";
 import { Container, Header, SignUpInfo, Body, Form, Label, Input, Button, Error } from "@pages/LogIn/styles";
 import { useLogIn, useMe } from "@services/auth";
 
 function Login() {
-  const { data: me, isError, refetch: refetchMe } = useMe();
+  const { refetch: refetchMe } = useMe();
   const logInMutation = useLogIn();
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
@@ -18,23 +19,18 @@ function Login() {
       logInMutation.mutate(
         { email, password },
         {
-          onSuccess: (res) => refetchMe(),
+          onSuccess: () => refetchMe(),
           onError: (error) => setLogInError((error?.response?.data ?? "로그인에 오류가 발생했습니다.") as string),
         },
       );
     },
-    [email, password],
+    [email, password, logInMutation, refetchMe],
   );
 
-  console.log(isError, me);
-  if (!isError && me) {
-    console.log("go workspace page!");
-    console.log(me);
-  }
   return (
     <Container>
       <Header>
-        <div className="left-col"></div>
+        <div className="left-col" />
         <div className="center-col">
           <h1>Sleact</h1>
         </div>

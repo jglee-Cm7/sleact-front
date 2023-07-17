@@ -1,17 +1,18 @@
-import { errorStatusHandler } from "@utils/connectionUtils";
 import axios from "axios";
+
+import { errorStatusHandler } from "@utils/connectionUtils";
 
 export const apiBe = axios.create({
   baseURL: `${process.env.PUBLIC_BE_URL}`,
   timeout: 30_000,
   withCredentials: true,
-  paramsSerializer: function (paramObj) {
+  paramsSerializer(paramObj) {
     const params = new URLSearchParams();
-    for (const key in paramObj) {
-      if (paramObj[key] === undefined || paramObj[key] === null) continue;
-      params.append(key, paramObj[key]);
-    }
-
+    Object.keys(paramObj).forEach((key) => {
+      if (paramObj[key] !== undefined && paramObj[key] !== null) {
+        params.append(key, paramObj[key]);
+      }
+    });
     return params.toString();
   },
 });

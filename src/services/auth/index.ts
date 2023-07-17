@@ -1,5 +1,6 @@
-import { UseQueryOptions, UseMutationOptions, queryOptions, useMutation, useQuery, QueryKey } from "@tanstack/react-query";
+import { UseMutationOptions, useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+
 import authApi from "@services/auth/authApi";
 
 interface UseMutationOptionsType<T> extends UseMutationOptions<T, AxiosError, T, T> {}

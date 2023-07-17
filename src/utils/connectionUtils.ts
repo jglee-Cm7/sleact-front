@@ -14,8 +14,7 @@ export const errorStatusHandler = ({ status, data }: ErrorStatusHandler) => {
       break;
     case 403:
       // console.log('access denied');
-      const userStateCode = data.stateCode;
-      switch (userStateCode) {
+      switch (data.stateCode) {
         case "WITHDRAWAL": // 탈퇴
           break;
         case "DISABLED": // 정지

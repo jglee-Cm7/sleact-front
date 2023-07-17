@@ -1,9 +1,9 @@
+import React, { ChangeEvent, FormEventHandler, useCallback, useState } from "react";
+import { Link } from "react-router-dom";
+
 import useInput from "@hooks/useInput";
 import { Body, Button, Container, Error, Form, Header, Input, Label, LinkContainer, Success } from "@pages/SignUp/styles";
 import { useSignUp } from "@services/auth";
-
-import React, { ChangeEvent, FormEventHandler, useCallback, useState } from "react";
-import { Link } from "react-router-dom";
 
 function SignUp() {
   const signUpMutation = useSignUp();
@@ -20,19 +20,18 @@ function SignUp() {
       setPassword(e.target.value);
       setMismatchError(e.target.value !== passwordCheck);
     },
-    [passwordCheck],
+    [passwordCheck, setPassword, setMismatchError],
   );
   const onChangePasswordCheck = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       setPasswordCheck(e.target.value);
       setMismatchError(e.target.value !== password);
     },
-    [password],
+    [password, setPasswordCheck, setMismatchError],
   );
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    console.log(email, nickname, password, passwordCheck);
     if (mismatchError) return;
 
     setSignUpError("");
@@ -40,7 +39,7 @@ function SignUp() {
     signUpMutation.mutate(
       { email, nickname, password },
       {
-        onSuccess: (res) => setSignUpSuccess(true),
+        onSuccess: () => setSignUpSuccess(true),
         onError: (error) => {
           const errorMessage = (error?.response?.data ?? "이미 가입된 이메일입니다.") as string;
           setSignUpError(errorMessage);
