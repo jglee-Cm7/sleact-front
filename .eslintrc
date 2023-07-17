@@ -21,6 +21,7 @@
     "linebreak-style": ["error", "windows"],
     "quotes": ["error", "double", { "allowTemplateLiterals": true }],
     "semi": ["error", "always"],
+    "no-empty": ["warn"],
     "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": "off",
     "no-unused-vars": "off",
