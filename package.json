@@ -69,6 +69,6 @@
     "webpack-dev-server": "^4.15.1"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "yarn lint-fix"
+    "*.{js,ts,jsx,tsx}": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix"
   }
 }
