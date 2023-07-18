@@ -34,18 +34,20 @@ function SignUp() {
     e.preventDefault();
     if (mismatchError) return;
 
-    setSignUpError("");
-    setSignUpSuccess(false);
-    signUpMutation.mutate(
-      { email, nickname, password },
-      {
-        onSuccess: () => setSignUpSuccess(true),
-        onError: (error) => {
-          const errorMessage = (error?.response?.data ?? "이미 가입된 이메일입니다.") as string;
-          setSignUpError(errorMessage);
+    if (email && nickname && !mismatchError) {
+      setSignUpError("");
+      setSignUpSuccess(false);
+      signUpMutation.mutate(
+        { email, nickname, password },
+        {
+          onSuccess: () => setSignUpSuccess(true),
+          onError: (error) => {
+            const errorMessage = (error?.response?.data ?? "이미 가입된 이메일입니다.") as string;
+            setSignUpError(errorMessage);
+          },
         },
-      },
-    );
+      );
+    }
   };
 
   return (
@@ -86,7 +88,7 @@ function SignUp() {
           {mismatchError && <Error>비밀번호가 일치하지 않습니다.</Error>}
           {!email && <Error>이메일을 입력해주세요.</Error>}
           {!nickname && <Error>닉네임을 입력해주세요.</Error>}
-          {signUpError && <Error>이미 가입된 이메일입니다.</Error>}
+          {signUpError && <Error>{signUpError}</Error>}
           {signUpSuccess && <Success>회원가입되었습니다!. 로그인해주세요.</Success>}
           <Button type="submit">회원가입</Button>
         </Form>

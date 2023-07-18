@@ -1,12 +1,12 @@
 import React, { FormEventHandler, useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import useInput from "@hooks/useInput";
 import { Container, Header, SignUpInfo, Body, Form, Label, Input, Button, Error } from "@pages/LogIn/styles";
 import { useLogIn, useMe } from "@services/auth";
 
 function Login() {
-  const { refetch: refetchMe } = useMe();
+  const { data: me, isSuccess, refetch: refetchMe } = useMe();
   const logInMutation = useLogIn();
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
@@ -26,6 +26,14 @@ function Login() {
     },
     [email, password, logInMutation, refetchMe],
   );
+
+  if (isSuccess && me) {
+    return <Navigate to="/workspace/channel" replace />;
+  }
+
+  if (me === undefined) {
+    return <div>로딩중...</div>;
+  }
 
   return (
     <Container>
