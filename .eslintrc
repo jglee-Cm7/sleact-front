@@ -15,14 +15,17 @@
     "NodeJS": true
   },
   "plugins": ["@typescript-eslint"],
-  "extends": ["airbnb", "airbnb/hooks", "plugin:react/recommended", "plugin:jsx-a11y/recommended", "eslint-config-prettier", "plugin:prettier/recommended"],
+  "extends": ["airbnb", "airbnb/hooks", "plugin:react/recommended", "plugin:jsx-a11y/recommended", "eslint-config-prettier", "plugin:prettier/recommended", "plugin:import/recommended"],
   "rules": {
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "windows"],
     "quotes": ["error", "double", { "allowTemplateLiterals": true }],
     "semi": ["error", "always"],
+    "no-empty": ["warn"],
     "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
     "react/display-name": "off",
     "react/prop-types": "off",
     "prettier/prettier": ["error", { "endOfLine": "auto" }],

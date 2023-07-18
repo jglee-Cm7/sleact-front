@@ -4,12 +4,15 @@ import webpack, { Configuration as WebpackConfiguration } from "webpack";
 import { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import dotenv from "dotenv";
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 
 const isDevelopment = process.env.NODE_ENV !== "production";
+if (isDevelopment) dotenv.config({ path: "./.env.development" });
+else dotenv.config({ path: "./.env" });
 
 const config: Configuration = {
   name: "sleact",
@@ -24,10 +27,16 @@ const config: Configuration = {
       "@pages": path.resolve(__dirname, "src/pages"),
       "@utils": path.resolve(__dirname, "src/utils"),
       "@types": path.resolve(__dirname, "src/types"),
+      "@services": path.resolve(__dirname, "src/services"),
     },
   },
   entry: {
     app: "./index",
+  },
+  output: {
+    path: path.join(__dirname, "dist"),
+    filename: "[name].js",
+    publicPath: "/dist/",
   },
   module: {
     rules: [
@@ -67,13 +76,8 @@ const config: Configuration = {
       //   files: "./src/**/*",
       // },
     }),
-    new webpack.EnvironmentPlugin({ NODE_ENV: isDevelopment ? "development" : "production" }), // node가 아닌 환경에서 env 를 쓸 수 있게 한다.
+    new webpack.EnvironmentPlugin({ NODE_ENV: isDevelopment ? "development" : "production", PUBLIC_BE_URL: process.env.PUBLIC_BE_URL }), // node가 아닌 환경에서 env 를 쓸 수 있게 한다.
   ],
-  output: {
-    path: path.join(__dirname, "dist"),
-    filename: "[name].js",
-    publicPath: "/dist/",
-  },
   devServer: {
     historyApiFallback: true, // react router
     port: 3090,
@@ -92,7 +96,7 @@ const config: Configuration = {
 if (isDevelopment && config.plugins) {
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
   config.plugins.push(new ReactRefreshWebpackPlugin());
-  config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: "server", openAnalyzer: true }));
+  config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: "server", openAnalyzer: false }));
 }
 
 // 프로덕션에서 쓸 플러그인
