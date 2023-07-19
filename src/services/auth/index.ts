@@ -16,3 +16,7 @@ export function useMe() {
 export function useLogIn(options?: UseMutationOptionsType<unknown>) {
   return useMutation({ mutationFn: authApi.logIn, ...options });
 }
+
+export function useLogout(options?: UseMutationOptionsType<unknown>) {
+  return useMutation({ mutationFn: authApi.logOut, ...options });
+}

@@ -26,7 +26,7 @@ const config: Configuration = {
       "@layouts": path.resolve(__dirname, "src/layouts"),
       "@pages": path.resolve(__dirname, "src/pages"),
       "@utils": path.resolve(__dirname, "src/utils"),
-      "@types": path.resolve(__dirname, "src/types"),
+      "@typings": path.resolve(__dirname, "src/typings"),
       "@services": path.resolve(__dirname, "src/services"),
     },
   },
