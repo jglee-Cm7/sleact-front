@@ -26,7 +26,59 @@ export const Header = styled.header`
     flex: 1;
     justify-content: flex-end;
     max-width: 220px;
+    padding-right: 16px;
   }
+`;
+
+export const ProfileImg = styled.img`
+  width: 28px;
+  height: 28px;
+`;
+
+export const ProfileModal = styled.div`
+  display: flex;
+  padding: 20px;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+  }
+
+  & #profile-name {
+    font-weight: bold;
+  }
+
+  & #profile-active {
+    font-size: 13px;
+  }
+`;
+
+export const WorkspaceModal = styled.div`
+  padding: 10px 0 0;
+
+  & h2 {
+    padding-left: 20px;
+  }
+
+  & > button {
+    width: 100%;
+    height: 36px;
+    padding: 4px;
+    border: none;
+    background: transparent;
+    border-top: 1px solid rgba(28, 29, 28, 0.1);
+    cursor: pointer;
+  }
+`;
+
+export const LogoutButton = styled.button`
+  width: 100%;
+  height: 33px;
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid rgba(29, 28, 29, 0.1);
+  cursor: pointer;
 `;
 
 export const Body = styled.div`
@@ -68,6 +120,31 @@ export const WorkspaceName = styled.button`
 
   background-color: transparent;
   color: white;
+  cursor: pointer;
+`;
+
+export const WorkspaceButton = styled.button`
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: white;
+  border: 3px solid #3f0e40;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+  cursor: pointer;
+`;
+
+export const AddButton = styled.button`
+  color: white;
+  font-size: 24px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
   cursor: pointer;
 `;
 
