@@ -48,4 +48,4 @@ const getWorkspaceUser = (workspace: string, id: number) => {
   return get(`/workspaces/${workspace}/users/${id}`) as Promise<User>;
 };
 
-export default { getMyWorkspaces, addWorkspace, getWorkspaceChannels, addChannel, getWorkspaceMembers, inviteMember, getWorkspaceUser };
+export default { getMyWorkspaces, getWorkspaceChannels, addWorkspace, addChannel, getWorkspaceMembers, inviteMember, getWorkspaceUser };

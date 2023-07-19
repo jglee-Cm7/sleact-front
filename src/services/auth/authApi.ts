@@ -12,16 +12,16 @@ interface SignUpRequest {
   password: string;
 }
 
-const signUp = (params: SignUpRequest) => {
-  return post("/users", params);
-};
-
 const logIn = (params: LogInRequest) => {
   return post("/users/login", params);
 };
 
 const logOut = () => {
   return post("/users/logout");
+};
+
+const signUp = (params: SignUpRequest) => {
+  return post("/users", params);
 };
 
 const getMe = () => {
