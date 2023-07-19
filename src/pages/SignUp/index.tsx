@@ -2,8 +2,11 @@ import React, { ChangeEvent, FormEventHandler, useCallback, useState } from "rea
 import { Link } from "react-router-dom";
 
 import useInput from "@hooks/useInput";
-import { Body, Button, Container, Error, Form, Header, Input, Label, LinkContainer, Success } from "@pages/SignUp/styles";
+import { Body, Container, Error, Form, Header, LinkContainer, Success } from "@pages/SignUp/styles";
 import { useSignUp } from "@services/auth";
+
+import Label from "@components/Label";
+import Button from "@components/Button";
 
 function SignUp() {
   const signUpMutation = useSignUp();
@@ -61,30 +64,10 @@ function SignUp() {
       </Header>
       <Body>
         <Form onSubmit={onSubmit}>
-          <Label id="email-label">
-            <span>이메일 주소</span>
-            <div>
-              <Input type="email" id="email" name="email" value={email} onChange={onChangeEmail} />
-            </div>
-          </Label>
-          <Label id="nickname-label">
-            <span>닉네임</span>
-            <div>
-              <Input type="text" id="nickname" name="nickname" value={nickname} onChange={onChangeNickname} />
-            </div>
-          </Label>
-          <Label id="password-label">
-            <span>비밀번호</span>
-            <div>
-              <Input type="password" id="password" name="password" value={password} onChange={onChangePassword} />
-            </div>
-          </Label>
-          <Label id="password-check-label">
-            <span>비밀번호 확인</span>
-            <div>
-              <Input type="password" id="password-check" name="password-check" value={passwordCheck} onChange={onChangePasswordCheck} />
-            </div>
-          </Label>
+          <Label title="이메일 주소" id="email" type="email" value={email} onChange={onChangeEmail} />
+          <Label title="닉네임" id="nickname" type="text" value={nickname} onChange={onChangeNickname} />
+          <Label title="비밀번호" id="password" type="password" value={password} onChange={onChangePassword} />
+          <Label title="비밀번호 확인" id="password-check" type="password" value={passwordCheck} onChange={onChangePasswordCheck} />
           {mismatchError && <Error>비밀번호가 일치하지 않습니다.</Error>}
           {!email && <Error>이메일을 입력해주세요.</Error>}
           {!nickname && <Error>닉네임을 입력해주세요.</Error>}

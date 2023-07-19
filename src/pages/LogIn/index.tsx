@@ -2,8 +2,11 @@ import React, { FormEventHandler, useCallback, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
 import useInput from "@hooks/useInput";
-import { Container, Header, SignUpInfo, Body, Form, Label, Input, Button, Error } from "@pages/LogIn/styles";
+import { Container, Header, SignUpInfo, Body, Form, Error } from "@pages/LogIn/styles";
 import { useLogIn, useMe } from "@services/auth";
+
+import Label from "@components/Label";
+import Button from "@components/Button";
 
 function Login() {
   const { data: me, isSuccess, refetch: refetchMe } = useMe();
@@ -28,7 +31,9 @@ function Login() {
   );
 
   if (isSuccess && me) {
-    return <Navigate to="/workspace/channel" replace />;
+    // 유저가 가입한 워크스페이스의 일반 채널로 이동.
+    // 가입한 워크스페이스가 없을 경우 처리해줘야한다.
+    return <Navigate to="/workspace/sleact/channel/일반" replace />;
   }
 
   if (me === undefined) {
@@ -53,18 +58,8 @@ function Login() {
       <Body>
         <h1>이메일로 로그인해 보세요.</h1>
         <Form onSubmit={onSubmit}>
-          <Label id="email-label">
-            <span>이메일 주소</span>
-            <div>
-              <Input type="email" id="email" name="email" value={email} onChange={onChangeEmail} />
-            </div>
-          </Label>
-          <Label id="password-label">
-            <span>비밀번호</span>
-            <div>
-              <Input type="password" id="password" name="password" value={password} onChange={onChangePassword} />
-            </div>
-          </Label>
+          <Label title="이메일 주소" id="email" type="email" value={email} onChange={onChangeEmail} />
+          <Label title="비밀번호" id="password" type="password" value={password} onChange={onChangePassword} />
           {logInError && <Error>{`${logInError}`}</Error>}
           <Button type="submit">로그인</Button>
         </Form>
