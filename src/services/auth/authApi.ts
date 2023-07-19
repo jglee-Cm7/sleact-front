@@ -1,3 +1,4 @@
+import { User } from "@typings/db";
 import { get, post } from "@services/index";
 
 interface LogInRequest {
@@ -24,7 +25,7 @@ const logOut = () => {
 };
 
 const getMe = () => {
-  return get("/users");
+  return get("/users") as Promise<User | false>;
 };
 
 export default {
