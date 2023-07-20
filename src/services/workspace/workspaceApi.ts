@@ -35,7 +35,8 @@ const addChannel = (params: addChannelRequest) => {
   return post(`/workspaces/${workspace}/channels`, { name: channel }) as Promise<Channel>;
 };
 
-const getWorkspaceMembers = (workspace: string) => {
+const getWorkspaceMembers = ({ queryKey }: { queryKey: [string, string | undefined] }) => {
+  const [, workspace] = queryKey;
   return get(`/workspaces/${workspace}/members`) as Promise<User[]>;
 };
 
