@@ -16,7 +16,7 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/workspace/:workspace" element={<Workspace />}>
         <Route path="/workspace/:workspace/channel/:channel" element={<Channel />} />
-        <Route path="/workspace/:workspace/dm" element={<DirectMessage />} />
+        <Route path="/workspace/:workspace/dm/:dm" element={<DirectMessage />} />
       </Route>
     </Routes>
   );
