@@ -16,9 +16,9 @@ import EachChannel from "@components/EachChannel";
 
 function Workspace() {
   const { workspace } = useParams<{ workspace: string }>();
-  const { data: me, isSuccess, refetch: refetchMe } = useMe();
-  const { data: members } = useWorkspaceMembers(workspace);
-  const { data: channelData } = useWorkspaceChannels(workspace);
+  const { data: me, isSuccess, isLoading: isLoadingMe, refetch: refetchMe } = useMe();
+  const { data: members, isLoading: isLoadingMembers } = useWorkspaceMembers(workspace);
+  const { data: channelData, isLoading: isLoadingChannels } = useWorkspaceChannels(workspace);
   const logoutMutation = useLogout();
 
   const [ProfileMenu, toggleProfileMenuFn] = useMenu();
@@ -50,7 +50,10 @@ function Workspace() {
     return <Navigate to="/login" />;
   }
 
+  const isLoading = isLoadingMe && isLoadingChannels && isLoadingMembers;
+
   return (
+    !isLoading &&
     me && (
       <div>
         <Header>
