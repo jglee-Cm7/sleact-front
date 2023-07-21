@@ -17,4 +17,8 @@ export const Header = styled.header`
   box-shadow: 0 1px 0 rgba(var(--sk_foreground_low, 29, 28, 29), 0.13);
   padding: 20px 16px 20px 20px;
   font-weight: bold;
+
+  & > span {
+    margin-left: 5px;
+  }
 `;
