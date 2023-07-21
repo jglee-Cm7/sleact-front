@@ -18,6 +18,10 @@ export function useWorkspaceMembers(workspace?: string) {
   return useQuery({ queryKey: ["workspaceMembers", workspace], queryFn: workspaceApi.getWorkspaceMembers, staleTime: 10 * 60 * 1000, enabled: !!workspace });
 }
 
+export function useWorkspaceMember(workspace?: string, id?: string) {
+  return useQuery({ queryKey: ["workspaceMember", workspace, id], queryFn: workspaceApi.getWorkspaceMember, staleTime: 10 * 60 * 1000, enabled: !!workspace && !!id });
+}
+
 export function useAddWorkspace(options?: UseMutationOptions<Workspace, AxiosError, addWorkspaceRequest, Workspace>) {
   return useMutation({ mutationFn: workspaceApi.addWorkspace, ...options });
 }

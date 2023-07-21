@@ -40,6 +40,11 @@ const getWorkspaceMembers = ({ queryKey }: { queryKey: [string, string | undefin
   return get(`/workspaces/${workspace}/members`) as Promise<User[]>;
 };
 
+const getWorkspaceMember = ({ queryKey }: { queryKey: [string, string | undefined, string | undefined] }) => {
+  const [, workspace, id] = queryKey;
+  return get(`/workspaces/${workspace}/users/${id}`) as Promise<User>;
+};
+
 const inviteMember = (params: inviteMemberRequest) => {
   const { workspace, email } = params;
   return post(`/workspaces/${workspace}/members`, { email });
@@ -49,4 +54,4 @@ const getWorkspaceUser = (workspace: string, id: number) => {
   return get(`/workspaces/${workspace}/users/${id}`) as Promise<User>;
 };
 
-export default { getMyWorkspaces, getWorkspaceChannels, addWorkspace, addChannel, getWorkspaceMembers, inviteMember, getWorkspaceUser };
+export default { getMyWorkspaces, getWorkspaceChannels, addWorkspace, addChannel, getWorkspaceMembers, getWorkspaceMember, inviteMember, getWorkspaceUser };
