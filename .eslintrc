@@ -91,8 +91,8 @@
           ["external", "builtin"],
           ["type", "internal", "object"],
           ["parent", "sibling", "index"]
-        ],
-        "newlines-between": "always"
+        ]
+        // "newlines-between": "always"
       }
     ]
   },

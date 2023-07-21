@@ -4,16 +4,21 @@ import gravatar from "gravatar";
 
 import { useLogout, useMe } from "@services/auth";
 import { Header, Body, Workspaces, Channels, WorkspaceName, MenuScroll, Chats, WorkspaceButton, ProfileImg, ProfileModal, LogoutButton, AddButton, WorkspaceModal } from "@layouts/Workspace/styles";
-import { useWorkspaceChannels } from "@services/workspace";
 import useMenu from "@hooks/useMenu";
-import AddWorkspaceModal from "@layouts/Workspace/AddWorkspaceModal";
-import AddChannelModal from "@layouts/Workspace/AddChannelModal";
-import InvitationModal from "@layouts/Workspace/InvitationModal";
+import { useWorkspaceChannels, useWorkspaceMembers } from "@services/workspace";
+
+import AddWorkspaceModal from "@components/AddWorkspaceModal";
+import AddChannelModal from "@components/AddChannelModal";
+import InvitationModal from "@components/InvitationModal";
+import CollapseList from "@components/CollapseList";
+import EachDM from "@components/EachDM";
+import EachChannel from "@components/EachChannel";
 
 function Workspace() {
   const { workspace } = useParams<{ workspace: string }>();
-  const { data: me, isSuccess, refetch: refetchMe } = useMe();
-  const { data: channelData } = useWorkspaceChannels(workspace);
+  const { data: me, isSuccess, isLoading: isLoadingMe, refetch: refetchMe } = useMe();
+  const { data: members, isLoading: isLoadingMembers } = useWorkspaceMembers(workspace);
+  const { data: channelData, isLoading: isLoadingChannels } = useWorkspaceChannels(workspace);
   const logoutMutation = useLogout();
 
   const [ProfileMenu, toggleProfileMenuFn] = useMenu();
@@ -45,7 +50,10 @@ function Workspace() {
     return <Navigate to="/login" />;
   }
 
+  const isLoading = isLoadingMe && isLoadingChannels && isLoadingMembers;
+
   return (
+    !isLoading &&
     me && (
       <div>
         <Header>
@@ -70,7 +78,10 @@ function Workspace() {
           </Workspaces>
           <Channels>
             <WorkspaceName onClick={toggleWorkspaceMenuFn}>{me?.Workspaces.find((ws) => ws.url === workspace)?.name}</WorkspaceName>
-            <MenuScroll>{channelData?.map((channel) => <div key={channel.id}>{channel.name}</div>)}</MenuScroll>
+            <MenuScroll>
+              <CollapseList title="Channels">{channelData?.map((channel) => <EachChannel key={channel.id} channel={channel} />)}</CollapseList>
+              <CollapseList title="Direct Message">{members?.map((member) => <EachDM key={member.id} member={member} isMe={me && me.id === member.id} />)}</CollapseList>
+            </MenuScroll>
           </Channels>
           <Chats>
             <Outlet />
